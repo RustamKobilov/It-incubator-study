@@ -1,0 +1,153 @@
+function checkCashRegister(price, cash, cid) {
+  console.log(price + " price tovara")
+  console.log(cash + " kypyra kotoroi on dayt")
+  
+  let sdacha=cash-price;
+  console.log(sdacha + ' sdacha klienty')
+  
+
+let kassa={
+  status : "OPEN",
+  change : []
+};
+
+
+let money={
+PENNY:0.01,
+NICKEL:0.05,
+DIME:0.10,
+QUARTER:0.25,
+ONE:1,
+FIVE:5,
+TEN:10,
+TWENTY:20,
+"ONE HUNDRED":100
+};
+//console.log(money["ONE HUNDRED"])
+
+ let finishMoney=[];
+ 
+ 
+//console.log(realkassa)
+
+let lengthmonet=cid.map(function(value){
+  //console.log(value[1] +" znachenie " + money[value[0]])
+  return value[1]/money[value[0]]
+})
+lengthmonet[1]=Math.round(lengthmonet[1],2)
+//console.log(lengthmonet)
+
+
+let summrealkassa=cid.reduce(function(sum,elem){
+  return  sum+elem[1]
+},0)
+
+//console.log(summrealkassa + " summa vsei kassy")
+
+if(sdacha>summrealkassa){
+  return {status: "INSUFFICIENT_FUNDS", change: []}
+}
+if(sdacha==summrealkassa){
+kassa.status="CLOSED";
+kassa.change =cid;
+console.log(kassa) 
+  return kassa;
+}
+
+
+
+let moneyandkol=[];
+
+let moneyin=cid.map(function(value){
+  console.log(value[1] +" znachenie " + money[value[0]])
+  return value[1]
+})
+//console.log(moneyin + " moneyin")
+
+let keysMoney=Object.keys(money);
+
+for(let g in lengthmonet){
+
+  moneyandkol.push([keysMoney[g],money[keysMoney[g]],lengthmonet[g],moneyin[g]])
+}
+console.log(moneyandkol)
+// создаем массив номинал свойство количества,делим от верхнего ,до нижнего ,если получается,то оставляем ,если нет ,то не можем вернуть сдачу.
+for(let y=moneyandkol.length-1;y>=0;y--){
+
+//console.log(Math.trunc(sdacha/moneyandkol[y][1]))
+if(sdacha<0){
+  break;
+}
+
+if(Math.trunc(sdacha/moneyandkol[y][1])>0){
+  
+  //console.log(Math.trunc(sdacha/moneyandkol[y][1]));
+ let mnogetel= Math.trunc(sdacha/moneyandkol[y][1]);
+ //console.log(moneyandkol[y][2])
+  if(mnogetel>moneyandkol[y][2]){
+  mnogetel=moneyandkol[y][2]
+  }
+//console.log(mnogetel +" umnogaem na " + moneyandkol[y][1]) 
+//console.log(Math.trunc(sdacha/moneyandkol[y][1])*moneyandkol[y][2])
+
+finishMoney.push([moneyandkol[y][0],mnogetel*moneyandkol[y][1]])
+sdacha=(sdacha-mnogetel*moneyandkol[y][1]).toFixed(2)
+//console.log(sdacha + " sdacha seichas")
+
+}
+}
+
+if(sdacha>0){
+  return {status: "INSUFFICIENT_FUNDS", change: []}
+}
+
+
+console.log(" zdachy daem ")
+console.log(finishMoney)
+console.log(sdacha + " posle podscheta")
+
+
+let kassaAfter=[];
+
+for(let x=0;x<finishMoney.length;x++){
+//console.log(finishMoney[x][0])
+//console.log(value[0]+ " esli sohlos "+finishMoney[x][0] + " togda " + value[3] + " otnemi " + finishMoney[x][1])
+
+let fl=moneyandkol.filter(function(value){
+ return value[0]==finishMoney[x][0]
+}).map(function(value){
+return value[3]-finishMoney[x][1]
+});
+kassaAfter.push([finishMoney[x][0],fl[0]])
+
+//console.log(finishMoney[x][1])
+
+//console.log(fl) 
+//console.log(moneyandkol[finishMoney[x][0]] + " finish money")
+
+}
+console.log("znachenie kassy posle togo kak zabirayt zdachy")
+console.log(kassaAfter)
+
+
+
+
+
+for(let v=0;v<moneyandkol.length;v++){
+  for(let z=0;z<kassaAfter.length;z++){
+    //console.log(moneyandkol[v][0]+" VS "+kassaAfter[z][0])
+    if(moneyandkol[v][0]==kassaAfter[z][0]){
+      moneyandkol[v][3]=kassaAfter[z][1]
+      //console.log(moneyandkol[v][3] + " " +kassaAfter[z][1])
+    }
+  }
+}
+console.log("kassa itogo")
+console.log(moneyandkol)
+  //return change;
+  kassa.change=finishMoney
+console.log(kassa)
+return kassa;
+}
+
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
