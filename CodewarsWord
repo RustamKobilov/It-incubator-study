@@ -1,0 +1,8 @@
+function findShort(s){
+  let raz=s.split(" ");
+  let wordlength=raz.map(function(value){
+    return value.length;
+  })
+  console.log(wordlength)
+  return Math.min(...wordlength)
+}
