@@ -1,0 +1,34 @@
+function solution(number){
+ if(number<3){
+  return 0
+ }
+ let numberArr=[];
+ let result=[];
+ for(let x=0;x<number;x++){
+  numberArr.push(x)
+ }
+ //console.log(numberArr)
+ let threeNumber=numberArr.filter(function(value){
+  return value%3==0;
+ }).map(function(value){
+  return result.push(value)
+ });
+
+// console.log(result + " my result")
+let fiveNumber=numberArr.filter(function(value){
+  return value%5==0;
+}).filter(function(value){
+  return result.indexOf(value)==-1;
+}).map(function(value){
+  return result.push(value)
+})
+let finish=result.reduce(function(acc,value){
+  return acc+value
+})
+//console.log(fiveNumber)
+
+//console.log(result + " my result")
+
+//console.log(finish)
+return finish;
+}
