@@ -1,0 +1,7 @@
+function disemvowel(str) {
+  let bard=str.split(/[\a\e\i\o\u]/gi);
+  let itog=bard.join("");
+  //console.log(bard)
+  //console.log(itog)
+  return itog;
+}
