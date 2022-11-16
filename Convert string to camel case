@@ -1,0 +1,22 @@
+function toCamelCase(str){
+    let x=str.split("");
+    let p=[]
+    for(let g in x){
+        //console.log(x[g])
+        if(x[g]=="-"||x[g]=="_"){
+            //console.log("my tyt" )
+            p.push(Number(g)+1)
+        }
+    }
+    //console.log(p+" eto p do")
+    for(let w=0;w<p.length;w++){
+       // console.log(x[p[w]])
+       x[p[w]]= x[p[w]].toUpperCase()
+    }
+   // console.log(x)
+    let slovo=x.join("")
+        //console.log(slovo)
+    let slvfn=slovo.replace((/[\_\-]/g),"")
+    //console.log(slvfn)
+    return slvfn
+}
