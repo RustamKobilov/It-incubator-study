@@ -1,0 +1,15 @@
+function high(x){
+let arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+//console.log(charCoin.a)
+let n = x.split(" ").map(function (value){ return value.split("")}).map(function(value){
+    let h=0;
+    for(let x in value){
+    //console.log(arr_en.indexOf(value[x])+ " eto oznachaet")
+    h+=(arr_en.indexOf(value[x])+1)
+    }
+    return h;
+})
+//console.log(n)
+return x.split(" ")[n.indexOf(Math.max(...n))]
+
+}
