@@ -1,0 +1,5 @@
+function alphanumeric(string){
+  let filterReg=(/[a-zA-Z0-9]/gm);
+    let result=string.match(filterReg);
+    return string.match(filterReg)!==null?( result.length==string.length?true:false):false;
+}
