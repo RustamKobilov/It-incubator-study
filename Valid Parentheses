@@ -1,0 +1,19 @@
+function validParentheses(parens) {
+  // your code here ..
+  if(parens==""){
+      return true
+  }
+  if(parens.length<2||parens.length%2>0){
+      return false;
+  }
+  let finish=parens.length/2;
+  //console.log(finish)
+  for(let x=0;x<finish;x++){
+      //console.log(parens.length)
+      let reg=/\(\)/m;
+      parens=parens.replace(reg,"")
+      //console.log(parens + " i am parens")
+      //console.log(parens.length + " finish parens")
+  }
+  return parens.length==0?true:false;
+}
