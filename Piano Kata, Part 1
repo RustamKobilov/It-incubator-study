@@ -1,0 +1,34 @@
+function blackOrWhiteKey(keyPressCount) {
+    // your code here
+while(keyPressCount>88){
+    keyPressCount-=88
+}
+keyPressCount-=1
+ let start=[
+     "white",
+     "black",
+     "white"];
+ 
+ let middle=[
+     "white",
+     "black",
+     "white",
+     "black",
+     "white",
+     "white",
+     "black",
+     "white",
+     "black",
+     "white",
+     "black",
+     "white"];
+ let finish="white";
+ let piano=[...start]
+ for(let x=0;x<7;x++){
+     piano=piano.concat(middle)
+ }
+ piano.push(finish);
+
+ return piano[keyPressCount]
+ 
+}
