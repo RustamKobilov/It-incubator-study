@@ -1,0 +1,55 @@
+function firstNonRepeatingLetter(s) {
+  // Add your code here
+  let result=[];
+  let x=s.split("");
+  if(s.length<1){
+      return "";
+  }
+  let v=x.filter(function(value){
+      return value==value.toUpperCase();
+  }).map(function(value,index){
+    return   x.indexOf(value);
+  });
+  console.log(v)
+  let b=x.map(function(value){
+    return value.toLowerCase();  
+  }) 
+  console.log(b)
+  let coins=0;
+  for(let g=0;g<b.length;g++){
+      for(let y=0;y<b.length;y++){
+          //console.log(coins + " coins now")
+          //console.log(b[g] + " x[g] " + b[y] + " x[y]")
+         if(b[g]==b[y]){
+             coins++
+         }
+      }
+      //console.log(coins + " finish")
+  if(coins==1){
+      result.push(b[g])
+  }
+  coins=0;
+  }
+console.log(result)  
+  if(result.length<1){
+      return ""
+  }
+  
+  for(let t=0;t<result.length;t++){
+      for(let r=0;r<v.length;r++){
+      if(b.indexOf(result[t])==v[r]){
+          //console.log((b.indexOf(result[t]) + " " + v[r]))
+          result[t]=result[t].toUpperCase();
+      }    
+      }
+  }
+console.log(result + " After")
+
+return result[0];
+}
+
+console.log(firstNonRepeatingLetter(""));
+
+//.map(function(value){
+      //return parseInt(value,2)
+  //})
